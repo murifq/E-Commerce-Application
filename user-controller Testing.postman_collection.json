@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "a8897f9a-ab12-4a27-92a1-d47566f3b534",
+		"name": "user-controller Testing",
+		"description": "# About this collection\n\nThis collection helps you set up contract tests to ensure that two separate systems are compatible and can communicate with one another.\n\n## **Using the collection**\n\n**Step 1:** Send the sample requests and view the response and test results.\n\n**Step 2:** Replace the sample request URLs with your desired API endpoints.\n\n**Step 3:** Customize the tests in the \"Tests\" tab if needed. Don't forget to save your changes.\n\n### Resources\n\n[Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n\n[Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n\n[Postman Sandbox API reference](https://learning.postman.com/docs/sending-requests/grpc/postman-sandbox-api/#writing-assertions)\n\n[Using the Collection Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/)\n\n[  \n](https://postman.postman.co/documentation/24552533-5bead607-0197-4e1d-87d4-3160bc7631c1?entity=&branch=&version=)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34300254"
+	},
+	"item": [
+		{
+			"name": "Get All Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validate that the response code should be 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Validate that the response is json object",
+							"pm.test(\"Response is a json object\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"});",
+							"",
+							"// Validate that the response has an arg object",
+							"pm.test(\"Response to have 'arg' object\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('args');",
+							"});",
+							"",
+							"// Validate that the response has headers object",
+							"pm.test(\"Response to have 'headers' object\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('headers');",
+							"});",
+							"",
+							"// Validate that the response has url property",
+							"pm.test(\"Response to have 'url' property\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('url');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				},
+				"description": "The tests in this request validate that:\n\n- the response code is 200\n- the response is a JSON object\n- the response has an 'arg' object\n- the response has 'headers' object\n- the response has a 'URL' property"
+			},
+			"response": []
+		},
+		{
+			"name": "Get 1 User by userId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Validate that the response code should be 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Validate that the response is json object",
+							"pm.test(\"Response is a json object\", function () {",
+							"    pm.expect(pm.response.json()).to.be.an('object');",
+							"});",
+							"",
+							"// Validate that the response has an arg object",
+							"pm.test(\"Response to have 'arg' object\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('args');",
+							"});",
+							"",
+							"// Validate that the response has headers object",
+							"pm.test(\"Response to have 'headers' object\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('headers');",
+							"});",
+							"",
+							"// Validate that the response has url property",
+							"pm.test(\"Response to have 'url' property\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('url');",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				},
+				"description": "The tests in this request validate that:\n\n- the response code is 200\n- the response is a JSON object\n- the response has an 'arg' object\n- the response has 'headers' object\n- the response has a 'URL' property"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User by userId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const getData = () => pm.response.json().data;",
+							"",
+							"pm.test(\"Returns a book object\", () => {",
+							"    const data = getData();",
+							"",
+							"    // Check the expected properties exist",
+							"    pm.expect(data).to.have.property(\"title\");",
+							"    pm.expect(data).to.have.property(\"author\");",
+							"    pm.expect(data).to.have.property(\"published\");",
+							"",
+							"    // Check the values have the expected types",
+							"    pm.expect(data.title).to.be.a('string');",
+							"    pm.expect(data.author).to.be.a('string');",
+							"    pm.expect(data.published).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Return correct details for 'Sapiens' book\", () => {",
+							"    const data = getData();",
+							"",
+							"    // Check expected values are present",
+							"    pm.expect(data.title).to.equal(\"Sapiens\");",
+							"    pm.expect(data.author).to.equal(\"Yuval Noah Harari\");",
+							"    pm.expect(data.published).to.equal(2011);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"categoryId\": 1,\n  \"categoryName\": \"Electronics and Technologies\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api/admin/categories/1",
+				"description": "This request uses tests to verify both the structure (existence and type of individual properties) and exact values of the response data.\n\nUse `pm.expect(subject)` to wrap test subjects, and [Chai](https://www.chaijs.com/api/bdd/) for assertions."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User by userId Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const getData = () => pm.response.json().data;",
+							"",
+							"pm.test(\"Returns a book object\", () => {",
+							"    const data = getData();",
+							"",
+							"    // Check the expected properties exist",
+							"    pm.expect(data).to.have.property(\"title\");",
+							"    pm.expect(data).to.have.property(\"author\");",
+							"    pm.expect(data).to.have.property(\"published\");",
+							"",
+							"    // Check the values have the expected types",
+							"    pm.expect(data.title).to.be.a('string');",
+							"    pm.expect(data.author).to.be.a('string');",
+							"    pm.expect(data.published).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Return correct details for 'Sapiens' book\", () => {",
+							"    const data = getData();",
+							"",
+							"    // Check expected values are present",
+							"    pm.expect(data.title).to.equal(\"Sapiens\");",
+							"    pm.expect(data.author).to.equal(\"Yuval Noah Harari\");",
+							"    pm.expect(data.published).to.equal(2011);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyODQ5NTIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20ifQ.lYfJLEYtS4YZD_xAtu29SoX8OXwx3_BZ_CI0R9akfeg"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"categoryId\": 1,\n  \"categoryName\": \"Electronics and Technologies\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api/admin/users/12",
+				"description": "This request uses tests to verify both the structure (existence and type of individual properties) and exact values of the response data.\n\nUse `pm.expect(subject)` to wrap test subjects, and [Chai](https://www.chaijs.com/api/bdd/) for assertions."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://postman-echo.com"
+		}
+	]
+}

@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "eddc2a16-1007-425e-b6db-9c0241f8517f",
+		"name": "cart-controller Testing",
+		"description": "# About this collection\n\nThis collection helps you set up contract tests to ensure that two separate systems are compatible and can communicate with one another.\n\n## **Using the collection**\n\n**Step 1:** Send the sample requests and view the response and test results.\n\n**Step 2:** Replace the sample request URLs with your desired API endpoints.\n\n**Step 3:** Customize the tests in the \"Tests\" tab if needed. Don't forget to save your changes.\n\n### Resources\n\n[Scripting in Postman](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/)\n\n[Test script examples](https://learning.postman.com/docs/writing-scripts/script-references/test-examples/)\n\n[Postman Sandbox API reference](https://learning.postman.com/docs/sending-requests/grpc/postman-sandbox-api/#writing-assertions)\n\n[Using the Collection Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/)\n\n[  \n](https://postman.postman.co/documentation/24552533-5bead607-0197-4e1d-87d4-3160bc7631c1?entity=&branch=&version=)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34300254"
+	},
+	"item": [
+		{
+			"name": "Create Cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const json = pm.response.json();\r",
+							"\r",
+							"// Validate raw body sent in the request, be it form-data or JSON\r",
+							"pm.test(\"`form` should contain the correct form data\", function () {\r",
+							"    pm.expect(json.form).to.be.an('object');\r",
+							"    pm.expect(json.form.foo1).to.eql('bar1');\r",
+							"    pm.expect(json.form.foo2).to.eql('bar2');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo1",
+							"value": "bar1",
+							"type": "text"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{baseUrl}}/post",
+				"description": "The tests in this request validate that the request body sent as form-data is valid."
+			},
+			"response": []
+		},
+		{
+			"name": "Get 1 Cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				},
+				"description": "**Description**  \nThis request is designed to test an API endpoint with a small set of query parameters. By sending this request, you can assess how well your API handles simple requests and analyze its response times and performance under a minimal load.\n\n**Request details**  \nURL: [https://postman-echo.com/get](https://postman-echo.com/get)  \nHTTP Method: GET  \nQuery Parameters:\n\n- foo1: bar1\n- foo2: bar2\n    \n\n**Usage**  \nTo use this request, simply replace the URL with your own API endpoint and modify the query parameters according to your requirements."
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Carts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				},
+				"description": "**Description**  \nThis request is designed to test an API endpoint with a small set of query parameters. By sending this request, you can assess how well your API handles simple requests and analyze its response times and performance under a minimal load.\n\n**Request details**  \nURL: [https://postman-echo.com/get](https://postman-echo.com/get)  \nHTTP Method: GET  \nQuery Parameters:\n\n- foo1: bar1\n- foo2: bar2\n    \n\n**Usage**  \nTo use this request, simply replace the URL with your own API endpoint and modify the query parameters according to your requirements."
+			},
+			"response": []
+		},
+		{
+			"name": "Get 1 Cart Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "foo1",
+							"value": "bar1"
+						},
+						{
+							"key": "foo2",
+							"value": "bar2"
+						}
+					]
+				},
+				"description": "**Description**  \nThis request is designed to test an API endpoint with a small set of query parameters. By sending this request, you can assess how well your API handles simple requests and analyze its response times and performance under a minimal load.\n\n**Request details**  \nURL: [https://postman-echo.com/get](https://postman-echo.com/get)  \nHTTP Method: GET  \nQuery Parameters:\n\n- foo1: bar1\n- foo2: bar2\n    \n\n**Usage**  \nTo use this request, simply replace the URL with your own API endpoint and modify the query parameters according to your requirements."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Cart by cartId and productId and quantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const getData = () => pm.response.json().data;",
+							"",
+							"pm.test(\"Returns a book object\", () => {",
+							"    const data = getData();",
+							"",
+							"    // Check the expected properties exist",
+							"    pm.expect(data).to.have.property(\"title\");",
+							"    pm.expect(data).to.have.property(\"author\");",
+							"    pm.expect(data).to.have.property(\"published\");",
+							"",
+							"    // Check the values have the expected types",
+							"    pm.expect(data.title).to.be.a('string');",
+							"    pm.expect(data.author).to.be.a('string');",
+							"    pm.expect(data.published).to.be.a('number');",
+							"});",
+							"",
+							"pm.test(\"Return correct details for 'Sapiens' book\", () => {",
+							"    const data = getData();",
+							"",
+							"    // Check expected values are present",
+							"    pm.expect(data.title).to.equal(\"Sapiens\");",
+							"    pm.expect(data.author).to.equal(\"Yuval Noah Harari\");",
+							"    pm.expect(data.published).to.equal(2011);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJVc2VyIERldGFpbHMiLCJpc3MiOiJFdmVudCBTY2hlZHVsZXIiLCJpYXQiOjE3MzkyODM3NTgsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20ifQ.nwYG9ud56mxjNRsOERgwjeqPSAzi32cknf9hO3cVljI"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Sapiens\",\n    \"author\": \"Yuval Noah Harari\",\n    \"published\": 2011\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api/public/carts/11/products/52/quantity/1",
+				"description": "This request uses tests to verify both the structure (existence and type of individual properties) and exact values of the response data.\n\nUse `pm.expect(subject)` to wrap test subjects, and [Chai](https://www.chaijs.com/api/bdd/) for assertions."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://postman-echo.com"
+		}
+	]
+}
