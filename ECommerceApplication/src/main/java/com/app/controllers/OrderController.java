@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.config.AppConstants;
 import com.app.payloads.OrderDTO;
 import com.app.payloads.OrderResponse;
+import com.app.payloads.PaymentCreditCardDTO;
 import com.app.services.OrderService;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -29,8 +32,10 @@ public class OrderController {
 	public OrderService orderService;
 	
 	@PostMapping("/public/users/{email}/carts/{cartId}/payments/{paymentMethod}/order")
-	public ResponseEntity<OrderDTO> orderProducts(@PathVariable String email, @PathVariable Long cartId, @PathVariable String paymentMethod) {
-		OrderDTO order = orderService.placeOrder(email, cartId, paymentMethod);
+	public ResponseEntity<OrderDTO> orderProducts(@Valid @RequestBody PaymentCreditCardDTO paymentCreditCardDTO ,@PathVariable String email, @PathVariable Long cartId, @PathVariable String paymentMethod) {
+		System.out.println("orderController");
+		System.err.println(paymentCreditCardDTO.getCardNumber());
+		OrderDTO order = orderService.placeOrder(email, cartId, paymentMethod, paymentCreditCardDTO);
 		
 		return new ResponseEntity<OrderDTO>(order, HttpStatus.CREATED);
 	}

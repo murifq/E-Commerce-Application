@@ -24,6 +24,7 @@ import com.app.exceptions.ResourceNotFoundException;
 import com.app.payloads.OrderDTO;
 import com.app.payloads.OrderItemDTO;
 import com.app.payloads.OrderResponse;
+import com.app.payloads.PaymentCreditCardDTO;
 import com.app.repositories.CartItemRepo;
 import com.app.repositories.CartRepo;
 import com.app.repositories.OrderItemRepo;
@@ -65,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 	public ModelMapper modelMapper;
 
 	@Override
-	public OrderDTO placeOrder(String email, Long cartId, String paymentMethod) {
+	public OrderDTO placeOrder(String email, Long cartId, String paymentMethod, PaymentCreditCardDTO paymentCreditCardDTO) {
 
 		Cart cart = cartRepo.findCartByEmailAndCartId(email, cartId);
 
@@ -73,6 +74,10 @@ public class OrderServiceImpl implements OrderService {
 			throw new ResourceNotFoundException("Cart", "cartId", cartId);
 		}
 
+		if(!paymentMethod.equals("credit-card")) {
+			throw new APIException("Payment method not supported");
+		}
+		
 		Order order = new Order();
 
 		order.setEmail(email);
@@ -82,8 +87,15 @@ public class OrderServiceImpl implements OrderService {
 		order.setOrderStatus("Order Accepted !");
 
 		Payment payment = new Payment();
+
+		System.out.println("Line 91 orderServiceImpl.java");
+		System.out.println(paymentCreditCardDTO.getCardNumber());
+		System.out.println(paymentCreditCardDTO.getCvc());
+
 		payment.setOrder(order);
 		payment.setPaymentMethod(paymentMethod);
+		payment.setCardNumber(paymentCreditCardDTO.getCardNumber());
+		payment.setCvc(paymentCreditCardDTO.getCvc());
 
 		payment = paymentRepo.save(payment);
 
